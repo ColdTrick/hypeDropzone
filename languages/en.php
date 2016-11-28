@@ -2,6 +2,8 @@
 
 $english = array(
 
+	'item:object:temp_file_upload' => 'Dropzone temp file',
+	
 	'dropzone:response_error' => 'An unknown error has occurred',
 	'dropzone:default_message' => '<strong>Drop your files here</strong><br /><span>or click to select them from your computer</span>',
 	'dropzone:remove_file' => 'Remove',

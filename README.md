@@ -43,6 +43,19 @@ $('.elgg-form').trigger('initialize'); // will instantiate dropzone inputs conta
 $('.elgg-form').trigger('reset'); // will clear previews and hidden guid inputs
 ```
 
+### input/file takeover
+
+This plugin replaces the default input/file with a dropzone upload. This can however fail in your action if you use any of the following PHP functions:
+
+```php
+move_uploaded_file();
+is_uploaded_file();
+```
+
+Because `$_FILES` is filled with data which wasn't supplied by the form and these PHP functions check the actual submitted data.
+
+For normal use all the information in `$_FILES` is as if submitted by a form.
+
 ## Acknowledgements / Credits
 
 * Dropzone.js is a really cool library by Matias Meno
