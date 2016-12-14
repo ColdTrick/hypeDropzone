@@ -109,6 +109,16 @@ class DropzoneService {
 			if (!$upload->isValid()) {
 				$error = new \stdClass();
 				$error->error = elgg_get_friendly_upload_error($upload->getError());
+				if ($upload->getError() === UPLOAD_ERR_INI_SIZE) {
+					// Get post_max_size and upload_max_filesize
+					$post_max_size = elgg_get_ini_setting_in_bytes('post_max_size');
+					$upload_max_filesize = elgg_get_ini_setting_in_bytes('upload_max_filesize');
+					
+					// Determine the correct value
+					$max_upload = $upload_max_filesize > $post_max_size ? $post_max_size : $upload_max_filesize;
+					
+					$error->error .= '<br />' . elgg_echo('dropzone:ini:upload_limit', array(elgg_format_bytes($max_upload)));
+				}
 				$files[] = $error;
 				continue;
 			}
