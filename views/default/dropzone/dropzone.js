@@ -171,9 +171,7 @@ define(function (require) {
 						$(preview).attr('data-guid', filedata.guid);
 					}
 					if (filedata.messages.length) {
-						if (data.output && data.output.success) {
-							$(preview).find('.elgg-dropzone-messages').html(data.output.messages.join('<br />'));
-						}
+						$(preview).find('.elgg-dropzone-messages').html(filedata.messages.join('<br />'));
 					}
 				} else {
 					$(preview).addClass('elgg-dropzone-error').removeClass('elgg-dropzone-success');
