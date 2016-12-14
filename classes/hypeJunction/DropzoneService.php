@@ -36,7 +36,7 @@ class DropzoneService {
 
 			if ($upload->error) {
 				$messages[] = $upload->error;
-				$success = false;$
+				$success = false;
 				$guid = false;
 			} else {
 				$file = $upload->file;
