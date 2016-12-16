@@ -1,0 +1,8 @@
+Version history
+===============
+
+5.1 (2016-12-16):
+
+- added: Dutch translation
+- added: overrule input/file with a dropzone input
+- fixed: show success/error message with upload
