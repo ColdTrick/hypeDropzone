@@ -1,6 +1,10 @@
 Version history
 ===============
 
+5.1.1 (2016-12-20):
+
+- several small chores/fixes
+
 5.1 (2016-12-16):
 
 - added: Dutch translation
