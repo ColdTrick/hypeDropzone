@@ -157,7 +157,7 @@ define(function (require) {
 			}
 			$.each(files, function (index, file) {
 				var preview = file.previewElement;
-				if (data && data.output) {
+				if (data && data.output && data.output.length) {
 					var filedata = data.output[index];
 					if (filedata.success) {
 						$(preview).addClass('elgg-dropzone-success').removeClass('elgg-dropzone-error');
