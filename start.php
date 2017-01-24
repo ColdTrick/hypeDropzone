@@ -24,4 +24,8 @@ elgg_register_event_handler('init', 'system', function() {
 	elgg_register_plugin_hook_handler('cron', 'daily', '\hypeJunction\hypeDropzone\Cron::cleanupTempUploadedFiles');
 	
 	elgg_register_event_handler('upgrade', 'system', '\hypeJunction\hypeDropzone\Upgrade::registerSubtype');
+	
+	if (!elgg_is_active_plugin('file')) {
+		elgg_register_action('file/delete', dirname(__FILE__) . '/actions/file/delete.php');
+	}
 });
