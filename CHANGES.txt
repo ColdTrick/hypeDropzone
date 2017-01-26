@@ -1,6 +1,11 @@
 Version history
 ===============
 
+5.1.2 (2017-01-26):
+
+- fixed: correctly check on server feedback
+- fixed: unable to delete file during upload when file plugin is inactive
+
 5.1.1 (2016-12-20):
 
 - several small chores/fixes
