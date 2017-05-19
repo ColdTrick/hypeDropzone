@@ -30,7 +30,13 @@ class Actions {
 			
 			$file_guids = (array) get_input($field_name);
 			if (empty($file_guids)) {
-				continue;
+				// try inputname without trailing []
+				$field_name = rtrim(rtrim($field_name, ']'), '[');
+				
+				$file_guids = (array) get_input($field_name);
+				if (empty($file_guids)) {
+					continue;
+				}
 			}
 			
 			$files = [];
@@ -45,7 +51,8 @@ class Actions {
 				
 				$tmp_filename = $file->getFilenameOnFilestore();
 				if ($file instanceof \TempUploadFile) {
-					$tmp_filename = tempnam(sys_get_temp_dir(), 'dropzone_');
+					$tmp_dir = rtrim(sys_get_temp_dir(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+					$tmp_filename = tempnam($tmp_dir, 'dropzone_');
 					copy($file->getFilenameOnFilestore(), $tmp_filename);
 				}
 				
