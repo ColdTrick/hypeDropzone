@@ -16,6 +16,9 @@ class Cron {
 	 */
 	public static function cleanupTempUploadedFiles($hook, $type, $return_value, $params) {
 		
+		echo 'Starting hypeDropzone cleanup' . PHP_EOL;
+		elgg_log('Starting hypeDropzone cleanup', 'NOTICE');
+		
 		$time = (int) elgg_extract('time', $params, time());
 		
 		// ignore access
@@ -38,5 +41,8 @@ class Cron {
 		
 		// restore access
 		elgg_set_ignore_access($ia);
+		
+		echo 'Done with hypeDropzone cleanup' . PHP_EOL;
+		elgg_log('Done with hypeDropzone cleanup', 'NOTICE');
 	}
 }
