@@ -24,7 +24,7 @@ if (isset($vars['class'])) {
 	$options['class'] = "elgg-input-dropzone";
 }
 
-$vars['class'] = 'hidden';
+$vars['class'] = ['elgg-input-dropzone-file'];
 
 if (!isset($vars['name'])) {
 	$vars['name'] = 'file_guids';

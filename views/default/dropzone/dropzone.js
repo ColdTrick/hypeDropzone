@@ -58,7 +58,9 @@ define(function (require) {
 					} else {
 						this.on('success', dz.success);
 					}
+					this.on('addedfile', dz.backuprequired); 
 					this.on('removedfile', dz.removedfile);
+					this.on('removedfile', dz.restorerequired);
 				}
 				//forceFallback: true
 			};
@@ -197,6 +199,33 @@ define(function (require) {
 					}
 				});
 			}
+		},
+		/**
+		 * @returns {void}
+		 */
+		backuprequired: function () {
+			$input = $(this.element).parent().next('.elgg-input-dropzone-file');
+			if (!$input.prop('required')) {
+				return;
+			}
+			
+			$input.data('wasRequired', true);
+			$input.prop('required', false);
+		},
+		/**
+		 * @returns {void}
+		 */
+		restorerequired: function () {
+			$input = $(this.element).parent().next('.elgg-input-dropzone-file');
+			if (!$input.data('wasRequired')) {
+				return;
+			}
+			
+			if (this.files.length) {
+				return;
+			}
+						
+			$input.prop('required', true);
 		}
 	};
 

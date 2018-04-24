@@ -31,7 +31,6 @@ class Views {
 		if (!$vars['multiple']) {
 			$vars['max'] = 1;
 		}
-		unset($vars['required']);
 		
 		$return_value[ViewsService::OUTPUT_KEY] = elgg_view('input/dropzone', $vars);
 		
