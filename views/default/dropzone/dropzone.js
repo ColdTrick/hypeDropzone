@@ -144,7 +144,7 @@ define(function (require) {
 		 */
 		fallback: function () {
 			$('.elgg-dropzone').hide();
-			$('[id^="dropzone-fallback"]').removeClass('hidden');
+			$('input[data-dropzone-fallback]').removeClass('hidden');
 		},
 		/**
 		 * Files have been successfully uploaded
