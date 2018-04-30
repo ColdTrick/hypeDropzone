@@ -211,6 +211,7 @@ define(function (require) {
 			
 			$input.data('wasRequired', true);
 			$input.prop('required', false);
+			$input.get(0).setCustomValidity('');
 		},
 		/**
 		 * @returns {void}
