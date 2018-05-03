@@ -1,6 +1,10 @@
 Version history
 ===============
 
+5.2 (2018-05-03):
+
+- added: input dropzone now can be required
+
 5.1.4 (2017-09-06):
 
 - several small chores/fixes
