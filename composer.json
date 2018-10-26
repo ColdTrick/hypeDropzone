@@ -6,7 +6,7 @@
 	"keywords": [
 		"elgg", "plugin", "upload", "dropzone", "drag-n-drop"
 	],
-	"license": "GPL-2.0",
+	"license": "GPL-2.0-only",
 	"authors": [
 		{
 			"name": "Ismayil Khayredinov",
@@ -21,13 +21,15 @@
 		"installer-name": "hypeDropzone"
 	},
 	"require": {
-		"php": ">=5.5",
-		"composer/installers": "~1.0",
+		"composer/installers": "^1.0.8",
 		"bower-asset/dropzone": "~4.0"
 	},
 	"autoload": {
 		"psr-0": {
 			"": "classes/"
 		}
+	},
+	"conflict": {
+		"elgg/elgg": "<3.0"
 	}
 }

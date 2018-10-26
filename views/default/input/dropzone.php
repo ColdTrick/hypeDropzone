@@ -19,11 +19,7 @@ $vars['data-dropzone-fallback'] = $options['data-fallback-id'] = $fallback_input
 $vars['id'] = elgg_extract('id', $vars, $fallback_input_id);
 
 // Add dropzone class for JS initialization
-if (isset($vars['class'])) {
-	$options['class'] = "elgg-input-dropzone {$vars['class']}";
-} else {
-	$options['class'] = "elgg-input-dropzone";
-}
+$options['class'] = elgg_extract_class($vars, ['elgg-input-dropzone']);
 
 $vars['class'] = ['elgg-input-dropzone-file'];
 

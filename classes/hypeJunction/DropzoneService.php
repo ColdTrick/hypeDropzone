@@ -100,7 +100,7 @@ class DropzoneService {
 		$subtype = elgg_extract('subtype', $attributes, 'file', false);
 		unset($attributes['subtype']);
 
-		$class = get_subtype_class('object', $subtype);
+		$class = elgg_get_entity_class('object', $subtype);
 		if (!$class || !class_exists($class) || !is_subclass_of($class, ElggFile::class)) {
 			$class = ElggFile::class;
 		}

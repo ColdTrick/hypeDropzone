@@ -19,28 +19,23 @@ class Cron {
 		echo 'Starting hypeDropzone cleanup' . PHP_EOL;
 		elgg_log('Starting hypeDropzone cleanup', 'NOTICE');
 		
-		$time = (int) elgg_extract('time', $params, time());
-		
 		// ignore access
-		$ia = elgg_set_ignore_access(true);
-		
-		// prepare batch
-		$batch = new \ElggBatch('elgg_get_entities', [
-			'type' => 'object',
-			'subtype' => \TempUploadFile::SUBTYPE,
-			'limit' => false,
-			'created_time_upper' => ($time - (24 * 60 * 60)), // older than 1 day
-		]);
-		$batch->setIncrementOffset(false);
-		
-		// loop through old files
-		/* @var $file \TempUploadFile */
-		foreach ($batch as $file) {
-			$file->delete();
-		}
-		
-		// restore access
-		elgg_set_ignore_access($ia);
+		elgg_call(ELGG_IGNORE_ACCESS, function() {
+			// prepare batch
+			$batch = new \ElggBatch('elgg_get_entities', [
+				'type' => 'object',
+				'subtype' => \TempUploadFile::SUBTYPE,
+				'limit' => false,
+				'created_before' => '-1 day',
+			]);
+			$batch->setIncrementOffset(false);
+			
+			// loop through old files
+			/* @var $file \TempUploadFile */
+			foreach ($batch as $file) {
+				$file->delete();
+			}
+		});
 		
 		echo 'Done with hypeDropzone cleanup' . PHP_EOL;
 		elgg_log('Done with hypeDropzone cleanup', 'NOTICE');

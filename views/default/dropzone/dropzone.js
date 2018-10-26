@@ -193,7 +193,7 @@ define(function (require) {
 			var guid = $(preview).data('guid');
 
 			if (guid) {
-				elgg.action('action/file/delete', {
+				elgg.action('entity/delete', {
 					data: {
 						guid: guid
 					}

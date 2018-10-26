@@ -1,6 +1,6 @@
 <?php
 
-$english = array(
+return [
 
 	'item:object:temp_file_upload' => 'Dropzone temp file',
 	
@@ -18,6 +18,4 @@ $english = array(
 	'dropzone:file_not_entity' => 'File entity could not be created',
 	'dropzone:ini:upload_limit' => 'Maximum allowed file size is %s',
 	
-);
-
-add_translation('en', $english);
+];

@@ -51,11 +51,9 @@
 	border: 0;
 	margin: 0 auto;
 	position: relative;
-	top: -3px;
+	top: -6px;
 	width: 1px;
 	z-index: -1;
 	display: block;
-}
-.elgg-input-dropzone-file::-webkit-file-upload-button {
-	display: none;
+	opacity: 0;
 }

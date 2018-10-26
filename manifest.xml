@@ -3,7 +3,7 @@
 
 	<name>hypeDropzone</name>
 	<id>hypeDropzone</id>
-	<version>5.2</version>
+	<version>6.0</version>
 
 	<description>Drag and Drop File Uploads</description>
 	<category>files</category>
@@ -15,7 +15,7 @@
 
 	<requires>
 		<type>elgg_release</type>
-		<version>2.2</version>
+		<version>3.0</version>
 	</requires>
 
 	<provides>
