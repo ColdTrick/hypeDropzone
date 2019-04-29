@@ -58,7 +58,19 @@ define(function (require) {
 					} else {
 						this.on('success', dz.success);
 					}
+					if (this.options.uploadMultiple) {
+						this.on('completemultiple', dz.complete);
+					} else {
+						this.on('complete', dz.complete);
+					}
+					if (this.options.uploadMultiple) {
+						this.on('processingmultiple', dz.process);
+					} else {
+						this.on('processing', dz.process);
+					}
+					this.on('addedfile', dz.backuprequired); 
 					this.on('removedfile', dz.removedfile);
+					this.on('removedfile', dz.restorerequired);
 				}
 				//forceFallback: true
 			};
@@ -142,7 +154,11 @@ define(function (require) {
 		 */
 		fallback: function () {
 			$('.elgg-dropzone').hide();
-			$('[id^="dropzone-fallback"]').removeClass('hidden');
+			$('input[data-dropzone-fallback]').removeClass('hidden');
+		},
+		
+		process: function() {
+			$('form').find('[type="submit"]').addClass('elgg-state-disabled').prop('disabled', true);
 		},
 		/**
 		 * Files have been successfully uploaded
@@ -157,7 +173,7 @@ define(function (require) {
 			}
 			$.each(files, function (index, file) {
 				var preview = file.previewElement;
-				if (data && data.output) {
+				if (data && data.output && data.output.length) {
 					var filedata = data.output[index];
 					if (filedata.success) {
 						$(preview).addClass('elgg-dropzone-success').removeClass('elgg-dropzone-error');
@@ -171,9 +187,7 @@ define(function (require) {
 						$(preview).attr('data-guid', filedata.guid);
 					}
 					if (filedata.messages.length) {
-						if (data.output && data.output.success) {
-							$(preview).find('.elgg-dropzone-messages').html(data.output.messages.join('<br />'));
-						}
+						$(preview).find('.elgg-dropzone-messages').html(filedata.messages.join('<br />'));
 					}
 				} else {
 					$(preview).addClass('elgg-dropzone-error').removeClass('elgg-dropzone-success');
@@ -181,6 +195,10 @@ define(function (require) {
 				}
 				elgg.trigger_hook('upload:success', 'dropzone', {file: file, data: data});
 			});
+		},
+		
+		complete: function() {
+			$('form').find('[type="submit"]').removeClass('elgg-state-disabled').prop('disabled', false);
 		},
 		/**
 		 * Delete file entities if upload has completed
@@ -193,12 +211,40 @@ define(function (require) {
 			var guid = $(preview).data('guid');
 
 			if (guid) {
-				elgg.action('action/file/delete', {
+				elgg.action('entity/delete', {
 					data: {
 						guid: guid
 					}
 				});
 			}
+		},
+		/**
+		 * @returns {void}
+		 */
+		backuprequired: function () {
+			$input = $(this.element).parent().next('.elgg-input-dropzone-file');
+			if (!$input.prop('required')) {
+				return;
+			}
+			
+			$input.data('wasRequired', true);
+			$input.prop('required', false);
+			$input.get(0).setCustomValidity('');
+		},
+		/**
+		 * @returns {void}
+		 */
+		restorerequired: function () {
+			$input = $(this.element).parent().next('.elgg-input-dropzone-file');
+			if (!$input.data('wasRequired')) {
+				return;
+			}
+			
+			if (this.files.length) {
+				return;
+			}
+						
+			$input.prop('required', true);
 		}
 	};
 
